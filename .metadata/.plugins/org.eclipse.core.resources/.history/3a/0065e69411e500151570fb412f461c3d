@@ -1,0 +1,9 @@
+package kapil.kumar.travel;
+
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class TravelMapper extends Mapper<LongWritable,Text,NullWritable,Text> 
+{
+
+}

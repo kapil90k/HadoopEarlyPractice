@@ -1,0 +1,5 @@
+package kapil.kumar.average;
+
+public class AverageMapper extends Mapper{
+
+}

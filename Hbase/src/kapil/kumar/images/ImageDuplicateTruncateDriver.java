@@ -1,0 +1,41 @@
+package kapil.kumar.images;
+
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
+public class ImageDuplicateTruncateDriver {
+
+	public static void main(String[] args) throws IOException 
+	{
+		Configuration conf=new Configuration();
+		Job job=new Job(conf,"Remove duplicate images from sequence file");
+		
+		job.setJarByClass(ImageDuplicateTruncateDriver.class);
+		job.setMapperClass(ImageDuplicateTruncateMapper.class);
+		job.setReducerClass(ImageDuplicateTruncateReducer.class);
+		
+		job.setInputFormatClass(SequenceFileInputFormat.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
+		
+		
+		job.setOutputValueClass(Text.class);
+		job.setOutputKeyClass(Text.class);
+		
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job,new Path(args[1]));
+		
+		Path outputPath=new Path(args[1]);
+		outputPath.getFileSystem(conf).delete(outputPath);
+		
+		
+	}
+
+}

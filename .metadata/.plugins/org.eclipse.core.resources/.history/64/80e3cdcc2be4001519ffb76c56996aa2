@@ -1,0 +1,7 @@
+package kapil.kumar.average;
+
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class AverageMapper extends Mapper{
+
+}

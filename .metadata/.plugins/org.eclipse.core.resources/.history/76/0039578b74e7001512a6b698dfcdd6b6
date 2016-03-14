@@ -1,0 +1,12 @@
+package kapil.kumar;
+
+import org.apache.hadoop.util.ToolRunner;
+
+public class SimpleRowCounter {
+
+	public static void main(String[] args)
+	{
+		int exitCode=ToolRunner.run(HBaseConfiguration.create(), new SimpleRowCounter(),args);
+	}
+
+}

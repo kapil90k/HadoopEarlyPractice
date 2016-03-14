@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;kapil.kumar.stackoverflow.StackoverflowMapper&apos; to &apos;UserMapper&apos;&#x0A;- Original project: &apos;Stackoverflow&apos;&#x0A;- Original element: &apos;kapil.kumar.stackoverflow.StackoverflowMapper&apos;&#x0A;- Renamed element: &apos;kapil.kumar.stackoverflow.UserMapper&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;StackoverflowMapper&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;kapil.kumar.stackoverflow{StackoverflowMapper.java[StackoverflowMapper" matchStrategy="1" name="UserMapper" qualified="false" references="true" similarDeclarations="false" stamp="1456653296630" textual="false" version="1.0"/>
+</session>

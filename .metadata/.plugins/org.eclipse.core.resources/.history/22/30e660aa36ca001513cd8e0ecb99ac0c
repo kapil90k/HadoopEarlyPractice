@@ -1,0 +1,24 @@
+package kapil.kumar.images;
+
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.mapreduce.Job;
+
+public class ImageDuplicateTruncateDriver {
+
+	public static void main(String[] args) throws IOException 
+	{
+		Configuration conf=new Configuration();
+		Job job=new Job(conf,"Remove duplicate images from sequence file");
+		
+		job.setJarByClass(ImageDuplicateTruncateDriver.class);
+		job.setMapperClass(ImageDuplicateTruncateMapper.class);
+		job.setReducerClass(ImageDuplicateTruncateReducer.class);
+		
+		
+		
+		
+	}
+
+}

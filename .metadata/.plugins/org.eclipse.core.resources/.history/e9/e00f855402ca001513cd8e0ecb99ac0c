@@ -1,0 +1,10 @@
+package kapil.kumar.images;
+
+public class ImageDuplicateDriver {
+
+	public static void main(String[] args) 
+	{
+
+	}
+
+}

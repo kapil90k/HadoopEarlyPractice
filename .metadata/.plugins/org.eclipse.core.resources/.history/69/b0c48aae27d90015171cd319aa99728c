@@ -1,0 +1,5 @@
+package kapil.kumar.serializable;
+
+public class Employee {
+
+}

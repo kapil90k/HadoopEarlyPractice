@@ -1,0 +1,6 @@
+10,kapil kumar,mca,agra
+20,shubham kumar,bca,mathura
+30,sarika kumari,phd,banaras
+40,varsha singh,b.ed,banasthali
+50,Maharaja Singh,MS,Geremany
+60,Mukhtyar Singh,Phd,USA

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;MrChaining&apos;&#x0A;- Original project: &apos;MrChaining&apos;&#x0A;- Original elements:&#x0A;     kapil.kumar.mr.chaining.AverageReducer.java&#x0A;     kapil.kumar.mr.chaining.ChainJobs.java" description="Delete elements" element1="/src&lt;kapil.kumar.mr.chaining{ChainJobs.java" element2="/src&lt;kapil.kumar.mr.chaining{AverageReducer.java" elements="2" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1457426444675" subPackages="false" version="1.0"/>
+</session>

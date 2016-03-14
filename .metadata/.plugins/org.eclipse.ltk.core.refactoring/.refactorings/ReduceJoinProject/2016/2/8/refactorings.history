@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;kapil.kumar.rj.ReduceJoin&apos; to &apos;ReduceJoinEdu&apos;&#x0A;- Original project: &apos;ReduceJoinProject&apos;&#x0A;- Original element: &apos;kapil.kumar.rj.ReduceJoin&apos;&#x0A;- Renamed element: &apos;kapil.kumar.rj.ReduceJoinEdu&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ReduceJoin&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;kapil.kumar.rj{ReduceJoin.java[ReduceJoin" matchStrategy="1" name="ReduceJoinEdu" qualified="false" references="true" similarDeclarations="false" stamp="1455645858350" textual="false" version="1.0"/>
+</session>

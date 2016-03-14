@@ -1,0 +1,6 @@
+package kapil.kumar.images;
+
+public class ImageDuplicateTruncateMapper extends Mapper<Text,ByteWritable,ByteWritable,Text>
+{
+
+}

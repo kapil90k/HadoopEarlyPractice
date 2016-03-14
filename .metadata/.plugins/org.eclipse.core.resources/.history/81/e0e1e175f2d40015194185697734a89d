@@ -1,0 +1,6 @@
+package kapil.kumar.partitioner;
+
+public class MyMapper extends Mapper<LongWritable,Text,Text,IntWritable> 
+{
+
+}

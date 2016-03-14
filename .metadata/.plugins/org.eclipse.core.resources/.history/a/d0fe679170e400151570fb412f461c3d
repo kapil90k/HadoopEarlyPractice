@@ -1,0 +1,68 @@
+package kapil.kumar.average;
+
+import java.io.IOException;
+
+import junit.framework.TestCase;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mrunit.mapreduce.MapDriver;
+import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
+import org.junit.Test;
+
+import com.google.common.collect.ImmutableList;
+
+public class AverageMapperTest extends TestCase
+{
+	public static class MyAverageMapper extends Mapper<LongWritable,Text,Text,IntWritable>
+	{
+		public void map(LongWritable key,Text value,Context context) throws InterruptedException,IOException
+		{
+			String line=value.toString();
+			String tokens[]=line.split(",");
+			context.write(new Text("avg"),new IntWritable(Integer.parseInt(tokens[9])));
+		}
+	}
+	
+	public static class MyAverageReducer extends Reducer<Text,IntWritable,Text,IntWritable>
+	{
+		public void reduce(Text key,Iterable<IntWritable> values,Context context)
+		{
+			
+		}
+	}
+	
+		MapDriver<LongWritable,Text,Text,IntWritable> mapDriver=MapDriver.newMapDriver(new MyAverageMapper());
+		ReduceDriver<Text, IntWritable, Text,IntWritable> reduceDriver=ReduceDriver.newReduceDriver(new MyAverageReducer());
+		
+		@Test
+		public void testMapper()
+		{
+			try {
+				mapDriver.withInput(new LongWritable(),new Text("1,2,3,4,5,6,7,8,9,10"));
+				mapDriver.withOutput(new Text("avg"), new IntWritable(10));
+				mapDriver.runTest();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		@Test
+		public void testReducer()
+		{
+			ImmutableList<IntWritable> iList=ImmutableList.of(new IntWritable(5),new IntWritable(6),new IntWritable(7),new IntWritable(8));
+			reduceDriver.withInput(new Text("avg"),iList);
+			reduceDriver.withOutput(new Text("avg"), new IntWritable(6));
+			try {
+				reduceDriver.runTest();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+}

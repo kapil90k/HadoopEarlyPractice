@@ -1,0 +1,9 @@
+package kapil.kumar.mr.chaining;
+
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class AsItIsMapper extends Mapper<LongWritable, Text, LongWritable, Text>
+{
+
+}

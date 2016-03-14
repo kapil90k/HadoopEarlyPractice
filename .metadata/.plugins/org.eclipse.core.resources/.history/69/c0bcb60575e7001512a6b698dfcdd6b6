@@ -1,0 +1,22 @@
+package kapil.kumar;
+
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+
+public class SimpleRowCounter extends Configured implements Tool{
+
+	public static void main(String[] args) throws Exception
+	{
+		int exitCode=ToolRunner.run(HBaseConfiguration.create(), new SimpleRowCounter(),args);
+		System.exit(exitCode);
+	}
+
+	@Override
+	public int run(String[] arg0) throws Exception 
+	{
+		
+	}
+
+}

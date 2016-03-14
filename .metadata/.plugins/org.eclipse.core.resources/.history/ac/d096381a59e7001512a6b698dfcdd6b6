@@ -1,0 +1,149 @@
+package kapil.kumar;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.KeyValue;
+import org.apache.hadoop.hbase.MasterNotRunningException;
+import org.apache.hadoop.hbase.ZooKeeperConnectionException;
+import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.util.Bytes;
+
+public class HbaseKapil 
+{
+	int count=0;
+	Configuration conf=HBaseConfiguration.create();
+	public void createTable(String tableName,ArrayList<String> cFamily) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
+	{
+		HBaseAdmin admin=new HBaseAdmin(conf);
+		if(admin.tableExists("tableName"))
+		{
+			System.out.println("table already exist with this name");
+			count=1;
+			return;
+		}
+		else
+		{
+			HTableDescriptor tableDesc=new HTableDescriptor(tableName);
+			for (int i = 0; i < cFamily.size(); i++) 
+			{
+				HColumnDescriptor hcd=new HColumnDescriptor(cFamily.get(i));
+				tableDesc.addFamily(hcd);	
+			}
+			admin.createTable(tableDesc);
+			count=2;
+		}
+		System.out.println("value of count: "+count);
+	}
+
+	public void addColumnFamily(String tableName,String columFamilyName) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
+	{
+		HBaseAdmin admin=new HBaseAdmin(conf);
+		if (!admin.tableExists(tableName)) {
+			ArrayList<String> family = null;
+			family.add(columFamilyName);
+			createTable(tableName, family);
+		}
+		admin.addColumn(tableName, new HColumnDescriptor(columFamilyName));
+		System.out.println("column family added "+columFamilyName);
+	}
+	
+	public void deleteColumnFamily(String tableName,String[] columnFamiliesToDelete ) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
+	{
+		HBaseAdmin admin=new HBaseAdmin(conf);
+		for (int i = 0; i < columnFamiliesToDelete.length; i++) 
+		{
+			admin.deleteColumn(tableName, columnFamiliesToDelete[i]);	
+		}
+	}
+
+	public void deleteTable(String tableName) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
+	{
+		HBaseAdmin admin=new HBaseAdmin(conf);
+		admin.disableTable(tableName);
+		admin.deleteTable(tableName);
+		System.out.println("table "+tableName+" has been deleted");
+	}
+	
+	
+	public void insertDataInColumnTable(String tableName,String columnFamily,String columnName,String rowKey,String value) throws IOException
+	{
+		HTable table=new HTable(conf, tableName);
+		
+		Put put1=new Put(Bytes.toBytes(rowKey));
+		put1.add(Bytes.toBytes(columnFamily), Bytes.toBytes(columnName),Bytes.toBytes(value));
+		
+		Put put2=new Put(Bytes.toBytes("cus2"));
+		put2.add(Bytes.toBytes("college"), Bytes.toBytes("college_name"),Bytes.toBytes("Nit Allahabad"));
+		
+		ArrayList<Put> putList=new ArrayList<Put>();
+		putList.add(put1);
+		putList.add(put2);
+		
+		table.put(putList);
+		
+		System.out.println("record inserted");
+	}
+	
+	public void deleteData(String tableName,String rowKey) throws IOException
+	{
+		HTable ht=new HTable(conf, tableName);
+		Delete del=new Delete(Bytes.toBytes(rowKey));
+		ht.delete(del);
+	}
+	
+	public void deleteSpecefic(String tableName,String rowKey,String columnFamily) throws IOException
+	{
+		HTable ht=new HTable(conf, tableName);
+		Delete del=new Delete(Bytes.toBytes(rowKey));
+		del.deleteFamily(Bytes.toBytes(columnFamily));
+		ht.delete(del);
+	}
+	
+	public void readWhole(String tableName) throws IOException
+	{
+		HTable table=new HTable(conf, tableName);
+		Scan scan=new Scan();
+		ResultScanner resultS=table.getScanner(scan);
+		for (Result result : resultS) 
+		{
+			KeyValue[] kv=result.raw();
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		try
+		{
+		HbaseKapil hbk=new HbaseKapil();
+		ArrayList<String> cFamily=new ArrayList<String>();
+		cFamily.add("family");
+		cFamily.add("college");
+		cFamily.add("employer");
+		cFamily.add("insurance");
+//		hbk.createTable("customerabc",cFamily);
+//		hbk.addColumnFamily("customerabc","insurance");
+//		String colFamilyToDelete[]={"temples","insurance"};
+//		hbk.deleteColumnFamily("customerabc",colFamilyToDelete);
+//		hbk.deleteTable("customera");
+//		hbk.insertDataInColumnTable("customerabc","family","father_name","cus1","M Singh");
+//		hbk.deleteData("customerabc","cus2");
+//		hbk.deleteSpecefic("customerabc","cus2","family");
+		hbk.readWhole("customerabc");
+		}		
+		catch (Exception e) 
+		{
+		}
+	}
+
+}

@@ -1,0 +1,10 @@
+package kapil.kumar.images;
+
+public class ImageDuplicateTruncateDriver {
+
+	public static void main(String[] args) 
+	{
+		
+	}
+
+}

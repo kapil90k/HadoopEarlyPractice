@@ -1,0 +1,18 @@
+package kapil.kumar.images;
+
+import org.apache.hadoop.io.BytesWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class ImageDuplicateTruncateMapper extends Mapper<Text,BytesWritable,BytesWritable,Text>
+{
+	public void map(Text key, BytesWritable value, Context context)
+	{
+		byte[] bytes = value.getBytes();
+		String md5OfImage=calculateMD5(bytes);
+	}
+
+	private String calculateMD5(byte[] bytes) {
+		
+	}
+}

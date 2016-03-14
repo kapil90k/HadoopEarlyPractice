@@ -1,0 +1,17 @@
+package kapil.kumar.partitioner;
+
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.mapreduce.Job;
+
+public class MyDriver {
+
+	public static void main(String[] args) throws IOException
+	{
+		Configuration conf=new Configuration();
+		Job job=new Job(conf, "Partitioner Demo");
+
+	}
+
+}

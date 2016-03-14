@@ -1,0 +1,25 @@
+package kapil.kumar.average;
+
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
+public class AverageDriver {
+
+	public static void main(String[] args) throws IOException 
+	{
+		Configuration conf=new Configuration();
+		Job job=new Job(conf,"Calculate Average");
+		
+		job.setJarByClass(AverageDriver.class);
+		job.setMapperClass(AverageMapper.class);
+		job.setReducerClass(AverageReducer.class);
+		
+		job.setInputFormatClass(TextInputFormat.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
+	}
+
+}

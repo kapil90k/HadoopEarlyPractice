@@ -1,0 +1,5 @@
+package kapil.kumar.mr.chaining;
+
+public class AverageReducer {
+
+}
